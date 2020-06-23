@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Serialization.Formatters;
 
 namespace ArrayObject
 {
@@ -33,44 +32,36 @@ namespace ArrayObject
                 return 0;
 
             int max = nums[0];
-            int index1 = 0, result = 0;
 
             for (int i = 1; i < nums.Length; i++)
             {
                 if (nums[i] > max)
                 {
                     max = nums[i];
-                    index1 = i;
                 }
             }
 
-            for (int i = nums.Length - 1; i >= 0; i--)
-            {
-                if (nums[i] == max)
-                {
-                    result = i - index1;
-                    break;
-                }
-            }
-            return result;
+            return Array.LastIndexOf(nums, max) - Array.IndexOf(nums, max);
         }
 
         /// <summary>
         /// Task 3 
         /// </summary>
-        public static void ChangeMatrixDiagonally(int[,] matrix)
+        public static void ChangeMatrixDiagonally(object matrix)
         {
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            int[,] newMatrix = matrix as int[,];
+
+            for (int i = 0; i < newMatrix.GetLength(0); i++)
             {
-                for (int j = 0; j < matrix.GetLength(1); j++)
+                for (int j = 0; j < newMatrix.GetLength(1); j++)
                 {
                     if (i < j)
                     {
-                        matrix[i, j] = 1;
+                        newMatrix[i, j] = 1;
                     }
                     else if (i > j)
                     {
-                        matrix[i, j] = 0;
+                        newMatrix[i, j] = 0;
                     }
                 }
             }
